@@ -4,6 +4,10 @@
 
 This project deploys an AWS Batch infrastructure for Quant Research.
 
+## List of deployed resources by this soluton:
+
+See [resources.md](resources.md) for a list of resources deployed with this solution.
+
 ## Pre-requisites
 
 The project has been built and tested using AWS Linux 2023 `x86` architecture
