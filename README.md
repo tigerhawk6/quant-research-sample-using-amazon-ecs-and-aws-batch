@@ -51,12 +51,12 @@ c. Create a GitHub Personal Access Token for allowing AWS CodePipeline to access
    ```
 4. Update the [.env](infrastructure/.env) file with the values for the infrastructure deployment. Below are the
    placeholder values provided in the [.env](infrastructure/.env) file for reference. Update the following items:
-- AWS_ACCOUNT_ID
-- AWS_ACCOUNT_ID
-- GITHUB_OWNER
-- GITHUB_REPO
-- GITHUB_TOKEN_SECRET_NAME (from step 2 above)
-- NAMESPACE
+  - AWS_ACCOUNT_ID
+  - AWS_ACCOUNT_ID
+  - GITHUB_OWNER
+  - GITHUB_REPO
+  - GITHUB_TOKEN_SECRET_NAME (from step 2 above)
+  - NAMESPACE
    ```shell
    # AWS account id and region where you need to deploy
    AWS_ACCOUNT_ID=<012345678901>
@@ -71,14 +71,24 @@ c. Create a GitHub Personal Access Token for allowing AWS CodePipeline to access
    # Unique identifier used as a prefix for your AWS infrastructure resources
    NAMESPACE=<quant-research-with-batch>
    ```
-6. If needed, modify the configurations provided in the [parameters.json](infrastructure/config/parameters.json)
+5. If needed, modify the configurations provided in the [parameters.json](infrastructure/config/parameters.json)
    | Line/Section | Item | Value | Why Change? |
    | -------- | -------- | -------- | -------- |
    | 6 | FSx Storage | True / False (default) | Change to false if high throughput is not needed |
    | 63 | spot | True / False (default) | Change to True to use Spot instances |
    | 71 | S3 Bucket Access | Add ARN's for S3 Buckets the Batch process can have access to | The solution has no S3 access without adding buckets to this section |
+
+6. Add any additional libraries to [requirements.txt](infrastructure/requirements.txt) that may be needed for your code to run. Current libraries being installed:
+   ```shell
+   - aws-cdk-lib==2.177.0
+   - constructs>=10.0.0,<11.0.0
+   - boto3
+   - s3fs
+   - pytest==6.2.5
+   - python-dotenv
+   ```
      
-8. Build the Python virtual environment
+7. Build the Python virtual environment
    ```shell
    python -m venv .venv
    source .venv/bin/activate
