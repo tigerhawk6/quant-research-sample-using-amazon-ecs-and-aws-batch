@@ -63,9 +63,58 @@ CodeBuild Project
   -  "ecr:PutImage",
   -  "ecr:UploadLayerPart"
 
-Container Image Repo
+Container Image Repo within AWS Elastic Container Repository
 
 
-## Network Stack
+## Network CloudFormation Stack
+
+Private VPC for Entire Stack, including PrivateLink Endpoints to Access AWS resources (S3, Batch, etc.)
+- VPC with CIDR 172.0.0.0/16
+- VPC Security Group "
+- 1 VPC Private Subnet
+- 2 VPC Route Tables
+    - 1 for local only traffic
+    - 1 for access to VPC PrivateLink Service Endpoints
+- IAM Role 
+  - AWSLambdaBasicExecutionRole Policy
+  - Inline Policy
+    - "ec2:AuthorizeSecurityGroupIngress",
+    - "ec2:AuthorizeSecurityGroupEgress",
+    - "ec2:RevokeSecurityGroupIngress",
+    - "ec2:RevokeSecurityGroupEgress"
+-  Ingress Security Group
+  - HTTPS TCP 443 From VPC
+  - ALL TCP From VPCEndpoint
+- PrivateLink Endpoints - Internal Access to AWS Services
+  - AWS Batch
+  - AWS EC2
+  - AWS SSm
+  - AWS KMS
+  - AWS CloudWatch Logs
+  - AWS FSx for Luster
+  - AWS ECS
+  - AWS ECR
+ 
+## S3 Storage CloudFormation Stack
+
+- S3 bucket, unless specified buckets during implementation
+  - S3 Bucket Policy that blocks and non-secure transport access
+
+- Lambda Function for cleaning up temp S3 data
+  - IAM Role for Lambda Execution
+ 
+- S3 Directory Bucket
+
+
+## Faster Throughput/IOPS Storage (If 
+
+- S3 Bucket for use with FSx for Lustre
+- 
+
+
+
+
+
+
 
 
