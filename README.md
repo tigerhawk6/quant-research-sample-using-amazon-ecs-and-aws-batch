@@ -27,7 +27,7 @@ a. AWS CDK - `v2.177.0`
  nvm install --lts
 
  # Install AWS CDK
- npm install -g aws-cdk@2.177.0
+ npm install -g aws-cdk
  ```
 
 b. Copy this repo via [GitHub Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) to your own GitHub account. 
